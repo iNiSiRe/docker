@@ -1,0 +1,14 @@
+RUN apt-get -y install wget build-essential cmake libgtk2.0-dev pkg-config libavcodec-dev \
+  libavformat-dev libswscale-dev libjpeg-dev libpng-dev
+
+RUN wget https://github.com/opencv/opencv/archive/4.1.0.zip
+
+RUN unzip 4.1.0.zip \
+    && cd opencv-4.1.0 \
+    && mkdir build \
+    && cd build \
+    && cmake -D OPENCV_GENERATE_PKGCONFIG=YES \
+        -D CMAKE_BUILD_TYPE=Release \
+        -D CMAKE_INSTALL_PREFIX=/usr/local .. \
+    && make -j7 \
+    && make install
